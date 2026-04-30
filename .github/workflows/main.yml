@@ -13,4 +13,5 @@ jobs:
       extra_files: "promtail-config.yaml"
 
   call-nginx:
+    needs: [call-deploy]
     uses: leoserverteam/DevOpsTemplates/.github/workflows/deploynginx.yml@main
