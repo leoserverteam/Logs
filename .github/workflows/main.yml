@@ -6,7 +6,6 @@ on:
       - main
 
 jobs:
-
   prepare-env:
     runs-on: [self-hosted] # Укажите ваш раннер (тот же, где деплой)
     steps:
@@ -17,6 +16,7 @@ jobs:
           echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" > ${{vars.DEPLOY_PATH}}/${{ github.event.repository.name }}/.env 
           echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> ${{vars.DEPLOY_PATH}}/${{ github.event.repository.name }}/.env 
   call-deploy:
+    needs: [prepare-env]
     uses: leoserverteam/DevOpsTemplates/.github/workflows/onlycompose.yml@main
     with:
       project_name: "${{ github.event.repository.name }}"
