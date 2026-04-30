@@ -5,11 +5,9 @@ services:
     image: grafana/loki:2.9.0
     ports:
       - "3100:3100"
-    command: 
-      -config.file=/etc/loki/local-config.yaml
-      - "-querier.max-concurrent=8"
-      - "-query-range.parallelise-shardable-queries=true"
-      - "-limits.config.readline-max-lines-limit=5000"
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/local-config.yaml
     networks:
       - monitoring
 
