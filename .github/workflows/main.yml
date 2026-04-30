@@ -6,10 +6,20 @@ on:
       - main
 
 jobs:
+
+  prepare-env:
+    runs-on: [self-hosted] # Укажите ваш раннер (тот же, где деплой)
+    steps:
+      - name: Create .env file
+        run: |
+          # Переходим в папку проекта и записываем секрет в ${{ github.event.repository.name }}/.env
+          mkdir -p ${{vars.DEPLOY_PATH}}/Logs
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" > ${{vars.DEPLOY_PATH}}/${{ github.event.repository.name }}/.env 
+          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> ${{vars.DEPLOY_PATH}}/${{ github.event.repository.name }}/.env 
   call-deploy:
     uses: leoserverteam/DevOpsTemplates/.github/workflows/onlycompose.yml@main
     with:
-      project_name: "Logs"
+      project_name: "${{ github.event.repository.name }}"
       extra_files: "promtail-config.yaml"
 
   call-nginx:
