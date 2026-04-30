@@ -10,7 +10,7 @@ jobs:
     uses: leoserverteam/DevOpsTemplates/.github/workflows/onlycompose.yml@main
     with:
       project_name: "Logs"
-      extra-files: "promtail-config.yaml"
+      extra_files: "promtail-config.yaml"
 
   call-nginx:
     uses: leoserverteam/DevOpsTemplates/.github/workflows/deploynginx.yml@main
