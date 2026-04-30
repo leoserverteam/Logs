@@ -5,11 +5,7 @@ services:
     image: grafana/loki:2.9.0
     ports:
       - "3100:3100"
-    command:
-      - "-config.file=/etc/loki/local-config.yaml"
-      - "-limits.config.max-outstanding-requests-per-user=100"
-      - "-limits.config.max-query-parallelism=16"
-      - "-querier.max-concurrent=16"
+    command: -config.file=/etc/loki/local-config.yaml 
     networks:
       - monitoring
 
