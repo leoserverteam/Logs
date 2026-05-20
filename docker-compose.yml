@@ -40,6 +40,8 @@ services:
       - monitoring
     extra_hosts:
       - "leonet.site:host-gateway"
+    volumes:
+      -  .grafana-data:/var/lib/grafana
 
 
 networks:
